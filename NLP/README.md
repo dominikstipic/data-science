@@ -1,5 +1,5 @@
 
-# Projects
+## Projects
 
 * **C1: Logistic Regression**: 
 
@@ -13,3 +13,7 @@ Naive Bayes Classifier
 * **C3: Embeddings**: 
 
 Embeddings
+
+* **TF-IDF**: 
+
+Term frequency and inverse document frequency informational retrieval
