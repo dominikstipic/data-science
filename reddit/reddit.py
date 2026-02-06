@@ -23,16 +23,10 @@ data = {
         "url": [],
         "num_comments": [],
         "created_utc": [],
+        "time": []
     }
-for submission in subreddit.hot(limit=40):
-    print(f"--- POST DATA ---")
-    print(f"Title:     {submission.title}")
+for submission in subreddit.hot(limit=None):
     matches = re.findall(r'\[(.*?)\]', submission.title)[0]
-    print(f"Author:    u/{submission.author}")
-    print(f"Score:     {submission.score}")
-    print(f"ID:        {submission.id}")
-    print(f"URL:       {submission.url}")
-    print(f"Comments:  {submission.num_comments}")
     date_obj = datetime.fromtimestamp(submission.created_utc)
     data['title'].append(submission.title) 
     data['tag'].append(matches.upper()) 
@@ -42,6 +36,9 @@ for submission in subreddit.hot(limit=40):
     data['url'].append(submission.url) 
     data['num_comments'].append(submission.num_comments) 
     data['created_utc'].append(submission.created_utc) 
+    dt = datetime.fromtimestamp(submission.created_utc)
+    data_str = dt.strftime('%Y-%m-%d %H:%M:%S %Z')
+    data['time'].append(data_str) 
 
 df = pd.DataFrame.from_dict(data)
 df.to_csv("reddit.csv")
